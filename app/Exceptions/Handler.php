@@ -2,8 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
@@ -23,8 +28,24 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        //
+    }
+
+    /**
+     * Custom render method for API JSON responses.
+     */
+    public function render($request, Throwable $exception)
+    {
+
+        if ($exception instanceof HttpException) {
+            $statusCode = $exception->getStatusCode();
+        } else {
+            $statusCode = 500;  // Valeur par défaut si l'exception n'est pas HTTP
+        }
+
+        return response()->json([
+            'error' => true,
+            'message' => $exception->getMessage() ?: class_basename($exception),
+        ], $statusCode);
     }
 }
