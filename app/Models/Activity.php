@@ -28,5 +28,10 @@ class Activity extends Model
         return $this->hasOne(Pdf::class, 'activity_id');
     }
 
+    public function quiz()
+    {
+        return $this->hasOne(Quiz::class);
+    }
+
 
 }
