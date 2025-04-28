@@ -11,7 +11,7 @@ class DomainController extends Controller
     public function index()
     {
         return response()->json(
-            Domain::with('courses')->get()
+            Domain::get()
         );
     }
 
@@ -30,7 +30,7 @@ class DomainController extends Controller
 
     public function show($id)
     {
-        $domain = Domain::with('courses.activities')->findOrFail($id);
+        $domain = Domain::with('courses')->findOrFail($id);
         return response()->json($domain);
     }
 

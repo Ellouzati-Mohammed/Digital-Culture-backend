@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Domain;
 
 class CourseController extends Controller
 {
@@ -30,12 +31,22 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return response()->json(
-            $course->load([
-                'activities.pdf',
-                'activities.video'
-            ])
-        );
+        // Charger les informations du domaine ainsi que les activités associées
+        $course = $course->load([
+            'domain',           // Charger le domaine associé au cours
+            'activities.pdf',   // Charger les activités PDF
+            'activities.video'  // Charger les activités vidéo
+        ]);
+
+        return response()->json($course);
+    }
+    public function showDomainWithCourses(Domain $domain)
+    {
+        $domain = $domain->load([
+            'courses'
+        ]);
+
+        return response()->json($domain);
     }
 
     public function update(Request $request, Course $course)

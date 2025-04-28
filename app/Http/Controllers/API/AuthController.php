@@ -14,14 +14,14 @@ class AuthController extends Controller
         $fields = $request->validate([
             'Full_Name' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string',
             'role' => 'in:admin,user'
         ]);
         $user = User::create([
             'Full_Name' => $fields['Full_Name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
-            'role' => $fields['role'] ?? 'user',
+            'role' => 'user',
         ]);
 
         $token = $user->createToken('apptoken')->plainTextToken;
@@ -38,7 +38,7 @@ class AuthController extends Controller
         $user = User::where('email', $fields['email'])->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response()->json(['message' => 'Bad credentials'], 401);
+            return response()->json(['message' => 'Incorrect email or password !'], 401);
         }
 
         $token = $user->createToken('apptoken')->plainTextToken;
