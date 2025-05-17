@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/courses/{domain}/domain', [CourseController::class, 'showDomainWithCourses']);
     Route::apiResource('/activities', ActivityController::class);
     Route::get('/activities/{course}/course', [ActivityController::class, 'showActivityWithCourse']);
-    
+
 Route::apiResource('/courses', CourseController::class);
 });
 
