@@ -1,5 +1,13 @@
 # Projet Laravel - Digital-Culture-backend
 
+
+## Liens des autres projets 
+
+**Pour un fonctionnement complet, il est impératif d'installer et lancer également ces deux projets :**
+
+- Frontend React : [Digital-Culture-frontend](https://github.com/Ellouzati-Mohammed/Digital-Culture-frontend)  
+- Serveur Rasa : *À ajouter ici le lien du dépôt Rasa*
+- 
 ## Description
 
 Digital-Culture-backend est le service API REST développé avec Laravel.  
