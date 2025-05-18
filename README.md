@@ -47,6 +47,5 @@ Il expose les endpoints nécessaires au frontend React pour gérer les utilisate
  ```bash
   php artisan serve
  ```
-Par défaut, l’API sera disponible sur : http://127.0.0.1:8000
 
 
