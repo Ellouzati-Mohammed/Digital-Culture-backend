@@ -22,18 +22,14 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::get('/user', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('/domains', DomainController::class);
     Route::get('/courses/{domain}/domain', [CourseController::class, 'showDomainWithCourses']);
     Route::apiResource('/activities', ActivityController::class);
     Route::get('/activities/{course}/course', [ActivityController::class, 'showActivityWithCourse']);
-
 Route::apiResource('/courses', CourseController::class);
 });
-
-
 
 Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['message' => 'CSRF token set']);
